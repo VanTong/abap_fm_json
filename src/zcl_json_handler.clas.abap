@@ -1982,11 +1982,10 @@ method JSON2ABAP.
 * Process ABAP tables
       if js_property_table is not initial.
         tabldesc ?= datadesc.
-        linedesc = tabldesc->get_table_line_type( ).
-        linetype = linedesc->get_relative_name( ).
+        strudesc ?= tabldesc->get_table_line_type( ).
         assign <abap_data> to <itab>.
         loop at js_property_table into js_property where name NE 'length'. " the JS object length
-          create data newline type (linetype).
+          create data newline type HANDLE strudesc.
           assign newline->* to <comp>.
           case js_property-kind.
             when 'O'.
